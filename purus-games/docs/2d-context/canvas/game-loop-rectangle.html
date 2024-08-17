@@ -1,0 +1,31 @@
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        "use strict";
+        let canvas;
+        let context;
+
+        window.onload = init;
+
+        function init(){
+            canvas = document.getElementById('canvas');
+            context = canvas.getContext('2d');
+
+            // Start the first frame request
+            window.requestAnimationFrame(gameLoop);
+        }
+
+        function gameLoop(timeStamp){
+            draw();
+
+            // Keep requesting new frames
+            window.requestAnimationFrame(gameLoop);
+        }
+
+        function draw(){
+            let randomColor = Math.random() > 0.5? '#ff8080' : '#0099b0';
+            context.fillStyle = randomColor;
+            context.fillRect(100, 50, 200, 175);
+        }
+    </script>
+</body>

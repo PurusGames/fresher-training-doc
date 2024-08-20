@@ -1,5 +1,5 @@
 # 2D HTML5 Game Tutorial
-## Create a smooth canvas animation
+## Canvas animation
 Create an animation on the HTML5 canvas and make it run smooth, no matter the frame rate. Learn how to apply time and easing functions. By the end of this tutorial, you can create a basic animation with the use JavaScript.
 
 ### Creating web animations

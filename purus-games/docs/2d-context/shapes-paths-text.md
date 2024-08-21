@@ -1,5 +1,5 @@
 # 2D HTML5 Game Tutorial
-## Draw shoes, paths and texts
+## Draw shapes, paths and texts
 
 Draw graphics on the HTML5 canvas using shapes and paths. Create rectangles, circles, lines, triangles and more complex shapes using SVG paths. By the end of this tutorial you can draw your own graphics and text on the canvas.
 

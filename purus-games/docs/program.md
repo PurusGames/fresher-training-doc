@@ -5,7 +5,7 @@
 * Understand basic terms of game development: Game Loop, Rendering, Physics
 * Make something interesting from what you’ve learned
 ### Tutorial
-https://spicyyoghurt.com/tutorials/html5-javascript-game-development/develop-a-html5-javascript-game
+[2D HTML5 game tutorial](./2d-context/introduction.md)
 
 ## PixiJS Tutorial (~1 week)
 ### Goal

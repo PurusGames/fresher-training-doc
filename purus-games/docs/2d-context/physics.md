@@ -272,3 +272,217 @@ let speed = vRelativeVelocity.x * vCollisionNorm.x + vRelativeVelocity.y * vColl
 ```
 
 As first row in the example code, another vector is created with the relative velocity of the objects. It's like the vector you would have left if you would make one of the game objects stationary. (You can read more about [relative velocities](https://www.schoolphysics.co.uk/age16-19/Mechanics/Kinematics/text/Relative_velocity/index.html) here.) It's easier to understand in the next example. The vectors of the two game objects are displayed on top of each other, so you can visualize the **relative velocity vector**:
+
+![](./img/physics-relative-vector.png)
+
+Together with the collision normal, the relative velocity vector is used to calculate the **dot product** of the two vectors. The dot product is the length of the projection of relative velocity on the collision normal. Or in other words, the length of the velocity vector when it's in the direction of the collision. Learn more about [dot products](https://www.mathsisfun.com/algebra/vectors-dot-product.html) here. Learn more about [vector operations](http://victorjs.org/) here.
+
+![](./img/physics-dot-product.png)
+
+The dot product is equal to the **speed** of the collision. So that's it, you've got a speed and direction of the collision between the two objects. You can apply this to the velocity of the game objects and make them bounce off of each other.
+
+### Change velocity of the moving objects
+
+The speed of the collision can be positive or negative. When it's positive, the objects are moving toward each other. When it's negative, they move away. When objects move away, there is no need to perform any further action. They will move out of collision on their own.
+
+```javascript
+if (speed < 0) {
+    break;
+}
+```
+
+For the other case, when objects are moving toward each other, apply the speed in the direction of the collision. Both objects get the same change in velocity from the collision. Subtract or add the velocity to the velocity of the two collided objects.
+
+```javascript
+obj1.vx -= (speed * vCollisionNorm.x);
+obj1.vy -= (speed * vCollisionNorm.y);
+obj2.vx += (speed * vCollisionNorm.x);
+obj2.vy += (speed * vCollisionNorm.y);
+```
+
+That's it, by applying speed to direction you calculate the **collision velocity**. And that velocity is now processed in the velocity of the objects involved. Your game objects should bounce in a natural looking way.
+
+![](./img/physics-collision.gif)
+
+### Add mass, impulse and momentum
+
+You can apply physics even further and take **mass** into the equation by calculating the **collision impulse** from the speed. Use the impulse to calculate **momentum**. Heavy objects will push light ones aside.
+
+```javascript
+let impulse = 2 * speed / (obj1.mass + obj2.mass);
+obj1.vx -= (impulse * obj2.mass * vCollisionNorm.x);
+obj1.vy -= (impulse * obj2.mass * vCollisionNorm.y);
+obj2.vx += (impulse * obj1.mass * vCollisionNorm.x);
+obj2.vy += (impulse * obj1.mass * vCollisionNorm.y);
+```
+
+If you have two objects with a mass of 1, the impulse is just equal to the speed. In other cases, you basically split the speed into many small parts. Heavy objects receive a few of those parts as momentum, light objects a lot. This makes the lighter objects more effected by the collision.
+
+If you have two objects with a mass of 1, the impulse is just equal to the speed. In other cases, you basically split the speed into many small parts. Heavy objects receive a few of those parts as momentum, light objects a lot. This makes the lighter objects more effected by the collision.
+
+Don't forget to add mass to your game objects. The ```GameObject``` class is a good place to store mass. You can modify the ```createWorld()``` function to pass mass as an argument via the ```Circle``` and ```Rectangle``` classes.
+
+Here's an example that's modified to create a lot of small circles and two larger ones. (The spawning algorithm isn't very smart so the objects might start in collision)
+
+![](./img/physics-mass.gif)
+
+In the example, the big circles have a very large mass compared to the smaller circles. They push everything out of their way. But when the two heavy objects hit each other, they bounce off too.
+
+### Get the heading of the objects
+The objects are constantly colliding and changing direction. For a game it would be helpful to know which direction exactly, so you can add rotated textures or build game logic based on it. Let's calculate it!
+
+You can easily get the **angle of the objects** by using ```Math.atan2()``` on the x and y velocities. The result is in The result is in **radians**, use ```Math.PI``` to translate it to **degrees**. Here's an example which calculates the angle in your ```update()``` function:
+
+```javascript
+update(secondsPassed) {
+    // Move with set velocity
+    this.x += this.vx * secondsPassed;
+    this.y += this.vy * secondsPassed;
+
+    // Calculate the angle (vy before vx)
+    let radians = Math.atan2(this.vy, this.vx);
+
+    // Convert to degrees
+    let degrees = 180 * radians / Math.PI;
+}
+```
+
+You can use the angle later in your game, to **draw rotated images**. For now, rotating isn't so interesting since the circle is a plain shape. You wouldn't notice a change in rotation. So, here's a simple implementation that shows the **movement direction** of the objects with a little line. The higher the speed, the longer the line. This basically represents the **heading vector** of the object. You can easily add this visualisation to your drawing function.
+
+```javascript
+draw() {
+    // Other drawing operations
+    // ...
+
+    // Draw heading vector
+    this.context.beginPath();
+    this.context.moveTo(this.x, this.y);
+    this.context.lineTo(this.x + this.vx, this.y + this.vy);
+    this.context.stroke();
+}
+```
+
+### Add the effects of gravity
+The examples shown in this tutorial contain just a basic implementation of physics. You could add more aspects to your game to make it look even **more natural**. Things like **gravity** or **restitution** aren't too hard to implement. Let's start right now with adding gravity to your simulation.
+
+For **gravity**, simply adjust the y-speed of your objects with the [gravitational acceleration](https://www.physicsclassroom.com/class/1DKin/Lesson-5/Acceleration-of-Gravity). On Earth, it's about _9.81 meter per second per second_. You can apply it inside the ```update()``` function of your game objects. Every second, g is added to the y-speed, this will make the object fall **faster and faster**.
+
+```javascript
+// Set gravitational acceleration
+const g = 9.81;
+
+update(secondsPassed){
+    // Apply acceleration
+    this.vy += g * secondsPassed;
+
+    // Move with set velocity
+    this.x += this.vx * secondsPassed;
+    this.y += this.vy * secondsPassed;
+}
+```
+
+Update the velocity before you update the position. This will give more accurate results, as explained in this article about [integrating the equations of motion](https://gafferongames.com/post/integration_basics/). This type of integration is called **Semi-implicit Euler**.
+
+### Confine the movement space of the objects
+For the effects of gravity to show nicely, you can limit the movement of your objects to the edges of the canvas. It will act like **a closed box** on which the objects can bounce off.
+
+You can make it happen with a simple adjustment. Execute the next function right after your main collision detection function, so _object-edge_ collisions are checked together with the _object-object_ collisions.
+
+```javascript
+// Define the edges of the canvas
+ const canvasWidth = 750;
+ const canvasHeight = 400;
+
+ // Set a restitution, a lower value will lose more energy when colliding
+ const restitution = 0.90;
+
+ function detectEdgeCollisions()
+ {
+     let obj;
+     for (let i = 0; i < gameObjects.length; i++)
+     {
+         obj = gameObjects[i];
+
+         // Check for left and right
+         if (obj.x < obj.radius){
+             obj.vx = Math.abs(obj.vx) * restitution;
+             obj.x = obj.radius;
+         }else if (obj.x > canvasWidth - obj.radius){
+             obj.vx = -Math.abs(obj.vx) * restitution;
+             obj.x = canvasWidth - obj.radius;
+         }
+
+         // Check for bottom and top
+         if (obj.y < obj.radius){
+             obj.vy = Math.abs(obj.vy) * restitution;
+             obj.y = obj.radius;
+         } else if (obj.y > canvasHeight - obj.radius){
+             obj.vy = -Math.abs(obj.vy) * restitution;
+             obj.y = canvasHeight - obj.radius;
+         }
+     }
+}
+```
+
+It basically checks for objects positioned **beyond the edges** and resets their position to fall within the box again. The speed of the objects is then flipped to move **perpendicular** to the wall.
+
+It's a very basic implementation and only works this way because the edges of the canvas are **predefined straight lines**. You could do the same with a _circle-line_ collision and set-up dynamic lines, but that would be much more complicated than this quick example.
+
+### Absorb impact by implementing restitution
+
+If you ran the code up till now, you'll see the game objects will never get in a resting state. They will keep bouncing and bouncing and never **lose any energy**. To counter this, you can implement **restitution**.
+
+Restitution basically describes how much **energy is left** after each collision. It has an effect on the bounciness of objects. The ratio between the **starting and ending velocity** after a bounce is called **coefficient of restitution**, or _COR_.
+
+* Objects with a _COR_ of _0_ would absorb all energy on impact, like a bag of sand hitting the floor.
+* Objects with a _COR_ of _1_ would have perfect elasticity, like a super bouncy bouncing ball.
+* Objects with a _COR_ > _1_ are completely fictional and would add extra energy after each collision.
+
+In the previous coding example, the _COR_ is being applied to the collision with the edges. This will make the objects lose just a little bit of **energy** after each bounce. It will make the simulation much more realistic, leaving it out would let the objects bounce on forever.
+
+To complete the implementation of the restitution, you'll need to apply it to the objects involved in an _object-object_ collision as well. Just multiply their speed by the **COR** (just ```restitution``` in the code). Every collision will now use up a bit of energy.
+
+When two objects collide with a different restitution setting, like for instance when a bouncing ball hits a bag of sand, the lowest restitution will count. In this case, neither the bouncing ball or the bag of sand will bounce, they both inherit the restitution of the bag.
+
+```javascript
+detectCollisions() {
+    // ...
+    // Calculate speed of the detected collision
+    let speed = vRelativeVelocity.x * vecCollisionNorm.x + vRelativeVelocity.y * vecCollisionNorm.y;
+
+    // Apply restitution to the speed
+    speed *= Math.min(obj1.restitution, obj2.restitution);
+    // ...
+}
+```
+
+The next live canvas example shows **gravity**, **restitution and boxing** being applied.
+
+![](./img/physics-gravity.gif)
+
+You can easily tweak the variables to create **different scenarios**. Set a high gravity to simulate being on a foreign planet or lower the restitution to make the objects act like bags of sand who absorb all impacts.
+
+### Ways of improving performance
+
+You might not really notice it right now, but with many game objects on screen at once or with more complex shapes, the collision detection and reaction can put some serious stress on your system. Here are some tips that might help to **improve performance**. They might seem obvious, but when a game gets more complex it's easy to overlook some of these concepts.
+
+* Only compare objects that are close enough to have a possible collision. You could use a grid system or only detect collision when objects enter a certain radius. This is called splitting the collision detection into a **broad phase** and **narrow phase**. Learn more about [broad phase collision detection](http://buildnewgames.com/broad-phase-collision-detection/) here.
+* Keep your **object pool** clean. Clean up objects when they are out of view or destroyed in-game.
+* Exclude **background/stationary objects**. Some objects won't ever react to collisions, so don't include them in the iteration.
+* Use **hitboxes**. As explained before, hitboxes are a great way of optimizing collision detection and simplify complex shapes.
+* Adjust the **implementation** of collision detection and physics to fit your game. You don't need a full physics engine when all you want to do is to make tic-tac-toe. That's a bit of a drastic example, but you get the point. Strip your logic to only support what is needed.
+
+### Handle fast-moving objects
+One final note about collision detection. The above example detects collisions by checking if two objects overlap. This is a good solution in many cases. But it won't work when your objects move at **great speed**. When the speed is higher than the size of your smallest object, objects have a chance of skipping the collision check. They **pass through** each other.
+
+Imagine you check for a collision between a bullet and an enemy in your game. The first frame the bullet is before the enemy. There is no overlap, so the objects didn't hit. The next frame the bullet moved so fast, it is now behind your enemy. There still is no overlap, so no collision. But the bullet did pass right through the enemy and there should've been a hit.
+
+Here's an image to demonstrate the situation of a fast-moving object, like a bullet, that never has any real overlap with another game object but should've caused a collision:
+
+![](./img/physics-bullet.png)
+
+You need another approach for this kind of situation. The simplest way is to **limit the speed** of your game objects. In short, make sure the speed is never larger than the smallest game object, so it can't pass through. For many types of games this is a great solution and it requires minimal effort.
+
+The other solution is to perform collision detection with the **projected path** instead of the current position of the two objects. Try to visualize the path of a bullet as a line. The length of the line is equal to the distance the bullet will travel. Now you can use a **line-to-rectangle** or **line-to-circle** collision check to find out if the bullet will hit another object. For large bullets, you could use a rectangle instead of a line.
+
+This is a simplified solution. You will probably run into other problems along the way, like finding the point of impact or determining which object of a greater set is hit first. But the steps mentioned here might help to point you in the right direction. For now, this is all on fast-moving objects for this tutorial.

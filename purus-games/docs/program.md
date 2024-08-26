@@ -1,6 +1,6 @@
 # Purus Games Fresher Training Program
 
-## 2D HTML5 Game Tutorial (~1 week)
+## 2D HTML5 Game (~1 week)
 
 ### Goal
 * Understand basic terms of game development: Game Loop, Rendering, Physics
@@ -9,10 +9,11 @@
 ### Tutorial
 [2D HTML5 game tutorial](./2d-context/introduction.md)
 
-## PixiJS Tutorial (~1 week)
+## 2D WebGL Game (~1 week)
 
 ### Goal
-* Learn how to use a WebGL 2D render library
+* Learn how WebGL works
+* Learn how to use PixiJS
 
 ### Tutorial
 https://github.com/kittykatattack/learningPixi

@@ -1,18 +1,14 @@
-# 2D WebGL Game Tutorial
+# WebGL Tutorial
 
 ## Introduction
 
 ### What is this tutorial about?
 
-Learn the fundamental knowledge about WebGL and learn how to use PixiJS, a WebGL supported render library.
+Learn the fundamental knowledge about WebGL.
 
 ### What is WebGL?
 
 WebGL (Web Graphics Library) is a JavaScript API that enables the rendering of 2D and 3D graphics directly within web browsers, without the need for additional plugins. Developed by the Khronos Group, WebGL leverages the capabilities of a device's GPU (Graphics Processing Unit) to deliver smooth, hardware-accelerated graphics. 
-
-### What is PixiJS?
-
-[PixiJS](https://pixijs.com/) is a 2D rendering engine that uses WebGL to create graphics in web applications. It allows developers to build games, animations, and other visual content directly in the browser. With its straightforward API, PixiJS handles tasks like rendering scenes, managing textures, and enabling interactivity, making it a practical tool for developing cross-platform web-based graphics.
 
 ### Why not just use the canvas 2d context?
 
@@ -28,4 +24,5 @@ Choosing WebGL over the Canvas 2D context depends on the specific needs of your 
 
 The series will take you through the following steps:
 1. [WebGL fundamentals](./webgl-funamentals.md)
-2. [WebGL image processing](./webgl-image-processing.md)
+2. [WebHL how it works](./webgl-how-it-works.md)
+3. [WebGL image processing](./webgl-image-processing.md)

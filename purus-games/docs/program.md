@@ -1,24 +1,28 @@
 # Purus Games Fresher Training Program
 
-## 2D HTML5 Game (~1 week)
+## 2D HTML5 Game
 
 ### Goal
 * Understand basic terms of game development: Game Loop, Rendering, Physics
 * Make something interesting from what you’ve learned
 
-### Tutorial
-[2D HTML5 game tutorial](./2d-context/introduction.md)
+### [Tutorial](./2d-context/introduction.md)
 
-## 2D WebGL Game (~1 week)
+## WebGL fundamentals
 
 ### Goal
 * Learn how WebGL works
-* Learn how to use PixiJS
+
+### [Tutorial](./2d-webgl/introduction.md)
+
+## 2D WebGL Game with PixiJS
+
+### Goal
+- Learn how to use PixiJS
 
 ### Tutorial
-https://github.com/kittykatattack/learningPixi
 
-## 3D WebGL game with PlayCanvas (~1 month)
+## 3D WebGL game with PlayCanvas
 
 ### Goal
 * Enjoy making your own 3D game using advantages of PlayCanvas
@@ -45,7 +49,7 @@ Write a document satisfying at least the following questions:
   * How can Player continue to play the game?
 * What is the most special part of the game?
 
-## Hyper casual game demo with Unity (~1 week)
+## Hyper casual game demo with Unity
 
 ### Goal
 * Learn how to use Unity by making a demo

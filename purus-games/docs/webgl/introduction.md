@@ -1,4 +1,4 @@
-# WebGL Tutorial
+# WebGL fundamentals
 
 ## Introduction
 

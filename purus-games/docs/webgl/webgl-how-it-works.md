@@ -1,6 +1,6 @@
-# WebGL Tutorial
+# WebGL fundamentals
 
-## WebGL how it works
+## How it works
 
 This tutorial will explain the basic level of what WebGL and your GPU actually do. There are basically 2 parts to this GPU thing. The first part processes vertices (or streams of data) into clip space vertices. The second part draws pixels based on the first part.
 

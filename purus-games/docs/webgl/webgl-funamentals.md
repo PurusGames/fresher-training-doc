@@ -1,6 +1,6 @@
-# 2D WebGL Game Tutorial
+# WebGL fundamentals
 
-## WebGL fundamentals
+## Fundamentals
 
 WebGL (Web Graphics Library) is often thought of as a 3D API. People think "I'll use WebGL and magic, I'll get cool 3d". In reality, WebGL is just a rasterization engine. It draws points, lines, and triangles based on code you supply. Getting WebGL to do anything else is up to you to provide code to use points, lines, and triangles to accomplish your task.
 

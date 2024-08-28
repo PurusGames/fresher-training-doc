@@ -13,7 +13,7 @@
 ### Goal
 * Learn how WebGL works
 
-### [Tutorial](./2d-webgl/introduction.md)
+### [Tutorial](webgl/introduction.md)
 
 ## 2D WebGL Game with PixiJS
 

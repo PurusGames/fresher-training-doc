@@ -10,7 +10,7 @@ Before you can start to actually draw an image on the canvas, you'll somehow nee
 
 An **image element** is a HTML container for images. You can create one by using the ```<img>``` tag on a web page. You can specify a [source for the image](https://html.com/attributes/img-src/) by using the ```src``` attribute. The browser will load the source and display the image inside the element when loaded. It's what you would normally use to display an image on a web page. You can use the image displayed in the image element, reference it and draw it on your canvas.
 
-To create your own image element, start by adding an ```<img>``` Set the ```src``` and ```id``` attributes. You can [download](./img/animation-image-bottle.png) the example image here.
+To create your own image element, start by adding an ```<img>``` Set the ```src``` and ```id``` attributes. You can [download](resources/animation-image-bottle.png) the example image here.
 
 ```html
 <img id="myImage" src="/img/my-image.png">
@@ -35,7 +35,7 @@ context.drawImage(img, 10, 30);
 
 The ```img``` variable, filled with the reference to your image element, will be drawn on the canvas. In this example it will be drawn on _(10, 30)_. It looks exactly the same as the original image in the image element.
 
-![](./img/animation-image-element.png)
+![](resources/animation-image-element.png)
 
 > ### Why isn't the image visible?
 > 
@@ -80,7 +80,7 @@ Here's an example that stretches the image from before to a size of _100x200_.
 context.drawImage(img, 10, 30, 100, 200);
 ```
 
-![](./img/animation-image-stretch.png)
+![](resources/animation-image-stretch.png)
 
 As you can see, the ratio of the image is changed. The image looks deformed now.
 
@@ -94,7 +94,7 @@ context.drawImage(img, 10, 30, img.width / 2, img.height / 2);
 ```
 Here's the result, with the original image displayed next to it.
 
-![](./img/animation-image-ratio.png)
+![](resources/animation-image-ratio.png)
 
 The image is scaled, but no longer deformed. The aspect ratio is maintained and is the same as that of the original image. Just keep in mind you need to scale the _width_ and _height_ by the same amount if you want to preserve the aspect ratio of an image.
 
@@ -111,7 +111,7 @@ context.drawImage(img, 10, 30, img.width * 3, img.height * 3);
 
 Here's a quick example. Left is the image without smoothing, right is smoothed. You can clearly see the difference when looking at the edges.
 
-![](./img/animation-image-smooth.png)
+![](resources/animation-image-smooth.png)
 
 ### Draw only a part of an image
 Sometimes you only want to draw a small part of the original image. Leaving out a part of the source image is called **clipping**. The ```drawImage()``` function can be extended to support clipping. All you need to do is add a few extra arguments.
@@ -124,7 +124,7 @@ context.drawImage(img, 100, 0, 200, 50, 10, 30, 200, 50);
 
 In the example a fragment of the image is picked from (_100, 0_), with a width of _200_ and height of _50_. The fragment is drawn to (_10, 30_), with the same width and height as the source. The result will look like this:
 
-![](./img/animation-image-clipping.png)
+![](resources/animation-image-clipping.png)
 
 A small part of the source image is drawn. The rest of the image is clipped.
 
@@ -137,7 +137,7 @@ In the next example the destination rectangle is twice the size of the source re
 context.drawImage(img, 100, 0, 200, 50, 10, 30, 400, 100);
 ```
 
-![](./img/animation-image-clipping-2.png)
+![](resources/animation-image-clipping-2.png)
 
 As you can see the image is now clipped and drawn twice the size of the previous example.
 
@@ -146,7 +146,7 @@ You can use the technique of clipping to display images from [sprite sheets](htt
 
 Here's an example sprite image, containing 10 frames of an animation:
 
-![](./img/animation-spritesheet.png)
+![](resources/animation-spritesheet.png)
 
 It's one image, but it consists of many smaller images merged together. Every sub image can be seen as a **frame**. In the example, you see the potion bottle change color a little bit more, every frame. Multiple animation frames can be packed together in one single image this way.
 
@@ -168,7 +168,7 @@ context.drawImage(sprite, column*frameWidth, row*frameHeight, frameWidth, frameH
 
 It will cut out and display only the desired potion bottle. It will look like this:
 
-![](./img/animation-frame.png)
+![](resources/animation-frame.png)
 
 ### Create a sprite animation
 In the previous example you've drawn only one image to the canvas. But if you want to create an animation from the sprite, you'll need to display a lot more frames, at a high interval.
@@ -212,7 +212,7 @@ setInterval(function()
 }, 100);
 ```
 
-![](./img/animation-interval.gif)
+![](resources/animation-interval.gif)
 
 Multiple frames of a sprite are drawn in quick succession. The result is an animation of the potion bottle changing color. It's a very basic example to give you a general idea. You can apply the same principles to more complex animation sprites.
 
@@ -225,7 +225,7 @@ Drawing a single image is fun, but a game needs many more instances. In the prev
 
 In the old example, simple circles are drawn to the canvas. Let's replace them with an actual image. And remember the collisions? For every collision, the image will take the next frame of the sprite. Here's what you'll get:
 
-![](./img/animation-collision.gif)
+![](resources/animation-collision.gif)
 
 Colliding potions that change color? This is one weird example, but hopefully it helps to demonstrate a more practical use of sprites. Adding images makes it look more like an actual game. To achieve this example, you'll need to take the next steps:
 * Load the desired image (not more than once)
@@ -323,7 +323,7 @@ this.context.drawImage(Circle.sprite, column * Circle.frameWidth, row * Circle.f
 
 The offset is there to make sure the body of the potion bottle exactly covers the circle used for **collision detection**. The image below illustrates the difference between using the offset (on the left) and just keeping the hitbox centered (on the right).
 
-![](./img/animation-hitbox.png)
+![](resources/animation-hitbox.png)
 
 As explained in the previous tutorial, many games use this method of using a simple shape (a circle in this case) as a hitbox for a more complex one (the potion bottle, with an irregular round shape). There is a small flaw however. The neck of the bottle doesn't trigger a collision because it has no hitbox, it sticks out of the circle. If that's a problem for your game, try to use a different or more complex hitbox. Maybe a rectangle shape or perhaps a combination of a rectangle and a circle.
 
@@ -376,7 +376,7 @@ To correct way of doing this is by adding a rotation around the **center of the 
 You can think of it as a way to move the canvas so the **origin** of the x and y axis is placed in the center of the image you want to rotate. When you rotate now, the image will rotate around its own center. After that, the canvas is translated back to its original position. The origin is now back to (_0,0_) and the transformation matrix contains a rotation. That's all happening in the first tree lines of the code block.
 
 > Rotating an image around its center point
-> ![](./img/animation-rotate.png)
+> ![](resources/animation-rotate.png)
 > The image above visualizes the rotating process. It consists of 4 steps.
 > * **Step 1** - Use the original transformation matrix. The image will be drawn at the origin.
 > * **Step 2** - Add a translation to the matrix. It will align the image center directly with the origin.
@@ -391,4 +391,4 @@ In this case, it's used to nullify the **transformation matrix**  the rotation a
 
 This is what you get when you run the code. It's a more natural view of the moving objects!
 
-![](./img/animation-rotation.gif)
+![](resources/animation-rotation.gif)

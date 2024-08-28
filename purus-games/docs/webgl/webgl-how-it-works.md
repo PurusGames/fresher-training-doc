@@ -15,7 +15,7 @@ gl.drawArrays(primitiveType, offset, count);
 
 The 9 there means "process 9 vertices" so here are 9 vertices being processed.
 
-![](./img/how-it-works-vertex.gif)
+![](resources/how-it-works-vertex.gif)
 
 On the left is the data you provide. The vertex shader is a function you write in GLSL. It gets called once for each vertex. You do some math and set the special variable `gl_Position` with a clip space value for the current vertex. The GPU takes that value and stores it internally.
 
@@ -82,7 +82,7 @@ void main() {
 
 WebGL will connect the varying in the vertex shader to the varying of the same name and type in the fragment shader.
 
-![](./img/how-it-works-color.png)
+![](resources/how-it-works-color.png)
 
 Try to change the triangle coordinates and see how the colors change.
 
@@ -90,4 +90,4 @@ Now think about it. We only compute 3 vertices. Our vertex shader only gets call
 
 WebGL takes the 3 values we computed for each vertex and as it rasterizes the triangle it interpolates between the values we computed for the vertices. For each pixel it calls our fragment shader with the interpolated value for that pixel.
 
-![](./img/how-it-works-vertex-2.gif)
+![](resources/how-it-works-vertex-2.gif)

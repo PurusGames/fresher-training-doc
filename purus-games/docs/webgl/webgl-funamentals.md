@@ -29,7 +29,7 @@ WebGL only cares about 2 things: clip space coordinates and colors. Your job as 
 
 Clip space coordinates always go from -1 to +1 no matter what size your canvas is.
 
-![](./img/fundamental-clipspace.png)
+![](resources/fundamental-clipspace.png)
 
 Here is a simple WebGL example that shows WebGL in its simplest form.
 
@@ -320,7 +320,7 @@ Converting from clip space to screen space if the canvas size happened to be 400
 
 WebGL will now render that triangle. For every pixel it is about to draw WebGL will call our fragment shader. Our fragment shader just sets ```gl_FragColor``` to ```1, 0, 0.5, 1```. Since the Canvas is an 8bit per channel canvas that means WebGL is going to write the values ```[255, 0, 127, 255]``` into the canvas.
 
-![](./img/fundamental-triangle.png)
+![](resources/fundamental-triangle.png)
 
 In the case above, you can see our vertex shader is doing nothing but passing on our position data directly. Since the position data is already in clip space there is no work to do. _If you want 3D it's up to you to supply shaders that convert from 3D to clip space because WebGL is only a rasterization API_.
 
@@ -389,7 +389,7 @@ var count = 6;
 gl.drawArrays(primitiveType, offset, count);
 ```
 
-![](./img/fundamental-resolution.png)
+![](resources/fundamental-resolution.png)
 
 Again you might notice the rectangle is near the bottom of that area. WebGL considers positive Y as up and negative Y as down. In clip space the bottom left corner -1,-1. We haven't changed any signs so with our current math 0, 0 becomes the bottom left corner. To get it to be the more traditional top left corner used for 2d graphics APIs we can just flip the clip space y coordinate.
 
@@ -397,7 +397,7 @@ Again you might notice the rectangle is near the bottom of that area. WebGL cons
    gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
 ```
 
-![](./img/fundamental-resolution-2.png)
+![](resources/fundamental-resolution-2.png)
 
 Let's make the code that defines a rectangle into a function so we can call it for different sized rectangles. While we're at it we'll make the color settable.
 
@@ -464,6 +464,6 @@ function setRectangle(gl, x, y, width, height) {
 }
 ```
 
-![](./img/fundamental-random-color.png)
+![](resources/fundamental-random-color.png)
 
 You can see that WebGL is actually a pretty simple API. The code is not simple but what it does is just simple. It just executes 2 user supplied functions, a vertex shader and fragment shader and draws triangles, lines, or points.

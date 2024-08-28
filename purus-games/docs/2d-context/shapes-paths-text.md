@@ -17,7 +17,7 @@ context.beginPath();
 context.arc(200, 100, 50, 0, 2 * Math.PI);
 context.fill();
 ```
-![Circle](./img/draw-shapes-circle.png)
+![Circle](resources/draw-shapes-circle.png)
 
 The ```arc()``` function is the one who defines an [arc-shaped](https://www.mathopenref.com/arc.html) path, in this case a full circle. It works like this:
 * The first two arguments are the **x** and **y** of the center of the circle.
@@ -32,7 +32,7 @@ context.moveTo(50, 50);
 context.lineTo(250, 150);
 context.stroke();
 ```
-![Line](./img/draw-shapes-line.png)
+![Line](resources/draw-shapes-line.png)
 
 Drawing a line starts again with calling ```beginPath()``` to mark the start of a new path. The next call to ```moveTo()``` is telling the context where to start drawing the path on your canvas. It doesn't really draw anything on its own, it only tells on which coordinates to start. From there you can draw a line with the ```lineTo()``` function.<br>
 
@@ -47,7 +47,7 @@ context.lineTo(250, 150);
 context.lineTo(250, 50);
 context.fill();
 ```
-![Triangle](./img/draw-shapes-triangle.png)
+![Triangle](resources/draw-shapes-triangle.png)
 
 The code for a triangle is almost similar to that of a separate line, only this time ```lineTo()``` is called multiple times.<br>
 Notice how ```lineTo()``` is called only twice, but you need three lines for a triangle. The last line is drawn automatically when you call ```fill()```. It closes the path and connects start to end.<br>
@@ -57,7 +57,7 @@ By stacking multiple commands after calling the ```beginPath()``` function you c
 You have been using ```fill()``` and ```stroke()``` to draw on the canvas. But what exactly is the difference between those ways of drawing?<br>
 When using a **fill** it is like you color the **surface** of a shape. It is completely filled with color. When using a **stroke**, you only draw the **outline** of an shape. The center of your path can still be empty.<br>
 You can mix up fill and stroke to create more complex graphics. Here's a simple overview on the difference between fill and stroke:<br>
-![Triangle](./img/draw-shapes-fill-stroke.jpg)
+![Triangle](resources/draw-shapes-fill-stroke.jpg)
 
 ### Stroking paths and shapes and set the color
 Here is an example of previously used paths and shapes that are stroked, not filled.
@@ -76,7 +76,7 @@ context.stroke();
 context.strokeStyle = '#ff8080';
 context.strokeRect(100, 50, 100, 125);
 ```
-![Triangle](./img/draw-shapes-stroking.png)
+![Triangle](resources/draw-shapes-stroking.png)
 
 As you can see ```fill()``` and ```fillRect()``` have their counterparts ```stroke()``` and ```strokeRect()```. There even is a ```strokeStyle``` attribute just like ```fillStyle```.
 ```javascript
@@ -102,7 +102,7 @@ You can stack multiple drawing operations to create complex graphics. But what i
 [SVG](https://www.sitepoint.com/svg-101-what-is-svg/), or **scalable vector graphics**, contain a detailed explanation of an graphic. But instead of describing pixels, like ordinary images, they describe lines and curves. Just like the paths you are creating for the canvas. The big advantages of using vector graphics is that they can be scaled without limit. Unlike regular pixel images, they don't lose quality.
 
 You can find SVG files online or create your own with vector drawing software like [Illustrator](https://www.adobe.com/products/illustrator.html) or [Inkscape](https://inkscape.org). Here's an example of creating a path with the Inkscape editor.<br>
-![](./img/draw-shapes-svg-1.jpg)
+![](resources/draw-shapes-svg-1.jpg)
 
 Inside those SVG files you can find path information. It's actually pretty fun to check it out. It's just a long array of points with moves and curves.<br>
 Here's an example of a small part of the inside of a simple SVG file. You can just open it with a text editor.
@@ -122,7 +122,7 @@ context.stroke(path);
 context.fill(path);
 ```
 
-![](./img/draw-shapes-svg-2.png)
+![](resources/draw-shapes-svg-2.png)
 
 The path describes exactly what the **heart** looks like. By passing the path as a argument for the ```stroke()``` and ```fill()``` functions it is drawn on the canvas. This is just an example, you could use much more [complex SVG paths](https://www.flaticon.com) and draw them as a shape.
 
@@ -140,4 +140,4 @@ context.textBaseline = 'bottom';
 ```
 Here's an example of text drawn on the canvas:
 
-![](./img/draw-shapes-text.png)
+![](resources/draw-shapes-text.png)

@@ -49,13 +49,13 @@ A simple ```update()``` function slightly changes the coordinates of the rectang
 
 Remember this when you start to add other tasks to your game loop. Always update the state of your game objects first and, as a final action, draw everything to the screen. For now, your game loop looks like this:
 
-![Loop](./img/canvas-animation-loop.png)
+![Loop](resources/canvas-animation-loop.png)
 
 ### A blur of repeated graphics
 
 When executing the code, you should expect to see the rectangle move in a slanted line, from the upper left corner to the lower right. Here is what you get:
 
-![Rectangle](./img/canvas-animation-rectangle.gif)
+![Rectangle](resources/canvas-animation-rectangle.gif)
 
 What is happening here? It looks like an endless repetition of rectangles, creating a big blur. The rectangle is drawn on the canvas, but the previous rectangle is never removed. Why is that?
 
@@ -84,11 +84,11 @@ The ```clearRect()``` function clears a part of the canvas. In this case, it is 
 
 With this new clear method in place, your game loop looks like this:
 
-![Loop](./img/canvas-animation-loop-2.png)
+![Loop](resources/canvas-animation-loop-2.png)
 
 When you run the new code, the rectangle is animated correctly. See the example below:
 
-![Loop](./img/canvas-animation-rectangle-2.gif)
+![Loop](resources/canvas-animation-rectangle-2.gif)
 
 ### Effects of dynamic frame rate on the animation
 Right now, the animation is really simple and runs smooth on about every device. But what if the animation was a lot more complex, like when running a game with many different animated objects?
@@ -176,7 +176,7 @@ function easeLinear (t, b, c, d) {
 
 This simple example uses a quintic ease and applies it to the x-position. The y-position is updated in a linear fashion. Here is the result:
 
-![Easing](./img/canvas-animation-easing.gif)
+![Easing](resources/canvas-animation-easing.gif)
 
 The easing functions might look difficult to understand, but the good news is you don't really have to. As long as you know what arguments to pass, you can use them. Here is a simple explanation of the arguments:
 * t = **Time** - Amount of time that has passed since the beginning of the animation. Usually starts at 0 and is slowly increased using a game loop or other update function.

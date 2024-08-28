@@ -10,7 +10,7 @@ To achieve this, you'll need a loop to repeatedly execute your game logic. In th
 
 Here's an example with a moving circle. It shows five frames in a row, each with a slightly different position of the circle. The five frames resemble five [iterations](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration) of your game loop logic. Moving the circle in small steps, one quickly after another, creates the effect of motion.
 
-![Motion](./img/game-loop-motion.png)
+![Motion](resources/game-loop-motion.png)
 
 ### The benefits of a high frame rate
 As you might know, with games, people talk about how many **fps** they can reach with their gaming rig. [Fps](https://www.techsmith.com/blog/frame-rate-beginners-guide/) stands for **frames per second**. Each time you draw your game objects on the screen, counts as a frame.
@@ -119,8 +119,8 @@ Let's try out your new game loop. When running this code, you see a big differen
 
 Here's a schematic view of your game loop. It will be expanded with more tasks as you progress through this tutorial series.
 
-![Draw](./img/game-loop-draw.png)
+![Draw](resources/game-loop-draw.png)
 
 The color of the rectangle is still random. So, a new random color is picked every frame. That's why you now see a flashy rectangle that is switching very fast between red and blue. This makes it easier to see the game loop is actually working (but isn't very pleasant to look at).
 
-![Rectangle](./img/game-loop-rectangle.gif)
+![Rectangle](resources/game-loop-rectangle.gif)

@@ -103,7 +103,7 @@ By the way, did you notice the ```use strict``` line missing in these new classe
 
 Take a look at the result:
 
-![](./img/physics-objects.gif)
+![](resources/physics-objects.gif)
 
 You can see a bunch of rectangles getting drawn now. They each have their own starting position and move in a different direction. Just as defined in the ```createWorld()``` function. You can tweak the variables to create new types of squares.
 
@@ -158,7 +158,7 @@ Another option would be to do the collision check in the right order, but iterat
 
 The correct order for your game loop is, **update**, **collision check**, **clear canvas**, **draw**. So, place the ```detectCollisions()``` function right after the loop for updating all game objects. Your total game loop now looks like this:
 
-![](./img/physics-game-loop.jpg)
+![](resources/physics-game-loop.jpg)
 
 ### Collision detection between rectangles
 The last piece of the puzzle is the ```rectIntersect()``` method. You can use it to check if two rectangles overlap. Checking for overlap between two **axis-aligned** (unrotated) rectangles is pretty simple and straight forward. You can probably come up with a method of checking for overlap on both axis by using the position and size of the rectangles. There are a lot of ways to do this, but the next method is very efficient:
@@ -176,7 +176,7 @@ rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {
 The code detects rectangles clearly overlapping halfway, but also works in the case of one small rectangle falling completely in a large one.<br>
 With this piece of code in place, you can finally check out the result. Here are the squares again, but this time they react upon each other.
 
-![](./img/physics-collision-detection.gif)
+![](resources/physics-collision-detection.gif)
 
 After detecting a collision, the ```isColliding``` attribute is set to true. This makes the squares draw in red. You can clearly see when two objects overlap now.
 
@@ -185,7 +185,7 @@ You have a method now for checking collision between unrotated rectangles. But w
 
 Imagine you have two circles, each with their own radius. They are placed with a distance between them. The circles would overlap if the **distance is smaller** than the **sum of the radius** of both circles. Since circles are round, this would even work when rotating the objects, they don't have to be axis-aligned.
 
-![](./img/physics-circle.jpg)
+![](resources/physics-circle.jpg)
 
 > Calculate distance between two points<br>
 > You can calculate the distance between two points with the following formula:<br>
@@ -208,7 +208,7 @@ As you can see, the formula is tweaked a bit. Multiplication is much faster than
 
 Here is the same example as before, but with circles this time:
 
-![](./img/physics-circle-collision.gif)
+![](resources/physics-circle-collision.gif)
 
 ### What about other shapes?
 In this article, collision detection is only covered for two types of shapes. But what if your game objects consist of other, more complex, shapes or even images and you want to perform collision checks between them?
@@ -222,7 +222,7 @@ Hitboxes are imaginary geometric shapes around game objects that are used to det
 
 You could simply use the function for rectangle collision detection, you've applied before, to check the hitboxes for collisions. It's far less CPU-intensive and makes supporting complex shapes in your game much easier. In some special cases, you could even use multiple hitboxes per game object. It would still outperform the pixel perfect solution.
 
-![](./img/physics-hitboxes.jpg)
+![](resources/physics-hitboxes.jpg)
 
 The image above demonstrates the different types of collision detection. They each have their own advantages and disadvantages:
 1. **Pixel perfect** - Super precise collision detection, but it requires some serious system resources. In most cases this is an overkill.
@@ -237,7 +237,7 @@ To change the **velocity** of the moving objects, you'll need to find out in wha
 ### Find the direction and speed of the collision
 Imagine the next collision between two game objects. Both objects have a speed and direction of their own. They don't hit each other exactly straight on, but just happen to cause a collision while moving on their own course.
 
-![](./img/physics-vector-1.jpg)
+![](resources/physics-vector-1.jpg)
 
 You'll want to find out the speed and direction of the collision so you can apply it to the velocity of the game objects. Start by creating a **vector** for the collision that took place. This vector is nothing more than the difference in x and y between the two colliding objects. You can see it as an arrow with **length** and **direction**. With vectors, the length is also called [magnitude](https://onlinemschool.com/math/library/vector/length/). Calculate the collision vector like this:
 ```javascript
@@ -246,7 +246,7 @@ let vCollision = {x: obj2.x - obj1.x, y: obj2.y - obj1.y};
 
 In the example of the two game objects, the collision vector will look like this:
 
-![](./img/physics-vector-2.jpg)
+![](resources/physics-vector-2.jpg)
 
 The magnitude in this case, is equal to the distance between the two colliding objects. It has nothing to do with speed yet. But you can use the direction of the vector. To get to the direction, you need to take away the factor of the distance.
 
@@ -262,7 +262,7 @@ let vCollisionNorm = {x: vCollision.x / distance, y: vCollision.y / distance};
 ```
 
 This will basically leave you with just a direction for the collision. In the example of the two game objects, it will look like this:
-![](./img/physics-vector-3.jpg)
+![](resources/physics-vector-3.jpg)
 
 You now have a **direction**. This is the direction in which the collision took place. All you need now is the collision **speed** and you'll be able to calculate how the velocity of the objects will be affected by the collision. You can calculate the speed of the collision like this:
 
@@ -273,11 +273,11 @@ let speed = vRelativeVelocity.x * vCollisionNorm.x + vRelativeVelocity.y * vColl
 
 As first row in the example code, another vector is created with the relative velocity of the objects. It's like the vector you would have left if you would make one of the game objects stationary. (You can read more about [relative velocities](https://www.schoolphysics.co.uk/age16-19/Mechanics/Kinematics/text/Relative_velocity/index.html) here.) It's easier to understand in the next example. The vectors of the two game objects are displayed on top of each other, so you can visualize the **relative velocity vector**:
 
-![](./img/physics-relative-vector.png)
+![](resources/physics-relative-vector.png)
 
 Together with the collision normal, the relative velocity vector is used to calculate the **dot product** of the two vectors. The dot product is the length of the projection of relative velocity on the collision normal. Or in other words, the length of the velocity vector when it's in the direction of the collision. Learn more about [dot products](https://www.mathsisfun.com/algebra/vectors-dot-product.html) here. Learn more about [vector operations](http://victorjs.org/) here.
 
-![](./img/physics-dot-product.png)
+![](resources/physics-dot-product.png)
 
 The dot product is equal to the **speed** of the collision. So that's it, you've got a speed and direction of the collision between the two objects. You can apply this to the velocity of the game objects and make them bounce off of each other.
 
@@ -302,7 +302,7 @@ obj2.vy += (speed * vCollisionNorm.y);
 
 That's it, by applying speed to direction you calculate the **collision velocity**. And that velocity is now processed in the velocity of the objects involved. Your game objects should bounce in a natural looking way.
 
-![](./img/physics-collision.gif)
+![](resources/physics-collision.gif)
 
 ### Add mass, impulse and momentum
 
@@ -324,7 +324,7 @@ Don't forget to add mass to your game objects. The ```GameObject``` class is a g
 
 Here's an example that's modified to create a lot of small circles and two larger ones. (The spawning algorithm isn't very smart so the objects might start in collision)
 
-![](./img/physics-mass.gif)
+![](resources/physics-mass.gif)
 
 In the example, the big circles have a very large mass compared to the smaller circles. They push everything out of their way. But when the two heavy objects hit each other, they bounce off too.
 
@@ -458,7 +458,7 @@ detectCollisions() {
 
 The next live canvas example shows **gravity**, **restitution and boxing** being applied.
 
-![](./img/physics-gravity.gif)
+![](resources/physics-gravity.gif)
 
 You can easily tweak the variables to create **different scenarios**. Set a high gravity to simulate being on a foreign planet or lower the restitution to make the objects act like bags of sand who absorb all impacts.
 
@@ -479,7 +479,7 @@ Imagine you check for a collision between a bullet and an enemy in your game. Th
 
 Here's an image to demonstrate the situation of a fast-moving object, like a bullet, that never has any real overlap with another game object but should've caused a collision:
 
-![](./img/physics-bullet.png)
+![](resources/physics-bullet.png)
 
 You need another approach for this kind of situation. The simplest way is to **limit the speed** of your game objects. In short, make sure the speed is never larger than the smallest game object, so it can't pass through. For many types of games this is a great solution and it requires minimal effort.
 

@@ -38,7 +38,7 @@ void main() {
 }
 ```
 
-Finally, we need to load [Mr Survivor image](./img/mr-survivor.jpg), create a texture and copy the image into the texture. Because we are in a browser images load asynchronously so we have to re-arrange our code a little to wait for the texture to load. Once it loads we'll draw it.
+Finally, we need to load [Mr Survivor image](resources/mr-survivor.jpg), create a texture and copy the image into the texture. Because we are in a browser images load asynchronously so we have to re-arrange our code a little to wait for the texture to load. Once it loads we'll draw it.
 
 ```javascript
 var image = new Image();
@@ -121,7 +121,7 @@ function render(image) {
 }
 ```
 
-![](./img/image-processing-texture.png)
+![](resources/image-processing-texture.png)
 
 Let just swapping red and blue and see what happens.
 
@@ -129,7 +129,7 @@ Let just swapping red and blue and see what happens.
 gl_FragColor = texture2D(u_image, v_texCoord).bgra;
 ```
 
-![](./img/image-processing-swap-color.png)
+![](resources/image-processing-swap-color.png)
 
 What if we want to do image processing that actually looks at other pixels? Since WebGL references textures in texture coordinates which go from 0.0 to 1.0 then we can calculate how much to move for 1 pixel with the simple math `onePixel = 1.0 / textureSize`.
 
@@ -175,7 +175,7 @@ gl.uniform2f(textureSizeLocation, image.width, image.height);
 
 Compare to the un-blurred image above.
 
-![](./img/image-processing-blur.png)
+![](resources/image-processing-blur.png)
 
 ### Image effects
 
@@ -238,7 +238,7 @@ In JavaScript we need to supply a convolution kernel and its weight
  ...
 ```
 
-![](./img/image-processing-kernel.png)
+![](resources/image-processing-kernel.png)
 
 Here are a few more kernel effects
 
@@ -404,7 +404,7 @@ function drawWithKernel(name) {
 }
 ```
 
-![](./img/image-processing-effects.png)
+![](resources/image-processing-effects.png)
 
 Calling `gl.bindFramebuffer` with `null` tells WebGL you want to render to the canvas instead of to one of your framebuffers.
 
@@ -444,6 +444,6 @@ And then we can set it when we render with
     gl.uniform1f(flipYLocation, -1);
 ```
 
-![](./img/image-processing-effects-2.png)
+![](resources/image-processing-effects-2.png)
 
 Try to add more convolution kernels and change effectsToApply to see what happens.

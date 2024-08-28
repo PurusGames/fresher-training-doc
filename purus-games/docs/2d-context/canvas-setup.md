@@ -74,5 +74,5 @@ function draw() {
 ```
 A ```fillStyle``` is set on the context and a rectangle is draw by calling ```fillRect()```.<br>
 Open your .html file and it should draw a rectangle on the canvas:
-![Rectangle](./img/canvas-setup-rect.png)
+![Rectangle](resources/canvas-setup-rect.png)
 With the current code, the rectangle is either red or blue. This is because every time the page is loaded a new random color is picked in the ```draw()``` function, by using ```Math.random()``` to pick a color as fill style. You can try to refresh this page a couple of times and see the color getting changed.

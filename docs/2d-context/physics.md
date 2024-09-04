@@ -173,7 +173,7 @@ rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {
 }
 ```
 
-The code detects rectangles clearly overlapping halfway, but also works in the case of one small rectangle falling completely in a large one.<br>
+The code detects rectangles clearly overlapping halfway, but also works in the case of one small rectangle falling completely in a large one.<br/>
 With this piece of code in place, you can finally check out the result. Here are the squares again, but this time they react upon each other.
 
 ![](resources/physics-collision-detection.gif)
@@ -187,9 +187,9 @@ Imagine you have two circles, each with their own radius. They are placed with a
 
 ![](resources/physics-circle.jpg)
 
-> Calculate distance between two points<br>
-> You can calculate the distance between two points with the following formula:<br>
-> c = sqrt((x1 - x2)2 + (y1 - y2)2)<br>
+> Calculate distance between two points<br/>
+> You can calculate the distance between two points with the following formula:<br/>
+> c = sqrt((x1 - x2)2 + (y1 - y2)2)<br/>
 > If you think of Δx and Δy as two sides of a triangle, it basically applies the [Pythagorean theorem](https://en.wikipedia.org/wiki/Pythagorean_theorem) to compute the size of the straight line between the points, c, the distance.
 
 So, if this distance is smaller than or equal to the radius of circle-a plus circle-b, the circles overlap or touch. This principle is used in the next function:

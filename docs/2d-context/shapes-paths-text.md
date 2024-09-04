@@ -34,7 +34,7 @@ context.stroke();
 ```
 ![Line](resources/draw-shapes-line.png)
 
-Drawing a line starts again with calling ```beginPath()``` to mark the start of a new path. The next call to ```moveTo()``` is telling the context where to start drawing the path on your canvas. It doesn't really draw anything on its own, it only tells on which coordinates to start. From there you can draw a line with the ```lineTo()``` function.<br>
+Drawing a line starts again with calling ```beginPath()``` to mark the start of a new path. The next call to ```moveTo()``` is telling the context where to start drawing the path on your canvas. It doesn't really draw anything on its own, it only tells on which coordinates to start. From there you can draw a line with the ```lineTo()``` function.<br/>
 
 When you have completed your path, consisting of just a line in this case, you can call ```stroke()``` to stroke the path and actually make it visible. ```fill()``` wouldn't work here since the path only consists of a single line and has no real surface.
 
@@ -49,14 +49,14 @@ context.fill();
 ```
 ![Triangle](resources/draw-shapes-triangle.png)
 
-The code for a triangle is almost similar to that of a separate line, only this time ```lineTo()``` is called multiple times.<br>
-Notice how ```lineTo()``` is called only twice, but you need three lines for a triangle. The last line is drawn automatically when you call ```fill()```. It closes the path and connects start to end.<br>
+The code for a triangle is almost similar to that of a separate line, only this time ```lineTo()``` is called multiple times.<br/>
+Notice how ```lineTo()``` is called only twice, but you need three lines for a triangle. The last line is drawn automatically when you call ```fill()```. It closes the path and connects start to end.<br/>
 By stacking multiple commands after calling the ```beginPath()``` function you can create almost any desired shape.
 
 ### The difference between using fill and stroke
-You have been using ```fill()``` and ```stroke()``` to draw on the canvas. But what exactly is the difference between those ways of drawing?<br>
-When using a **fill** it is like you color the **surface** of a shape. It is completely filled with color. When using a **stroke**, you only draw the **outline** of an shape. The center of your path can still be empty.<br>
-You can mix up fill and stroke to create more complex graphics. Here's a simple overview on the difference between fill and stroke:<br>
+You have been using ```fill()``` and ```stroke()``` to draw on the canvas. But what exactly is the difference between those ways of drawing?<br/>
+When using a **fill** it is like you color the **surface** of a shape. It is completely filled with color. When using a **stroke**, you only draw the **outline** of an shape. The center of your path can still be empty.<br/>
+You can mix up fill and stroke to create more complex graphics. Here's a simple overview on the difference between fill and stroke:<br/>
 ![Triangle](resources/draw-shapes-fill-stroke.jpg)
 
 ### Stroking paths and shapes and set the color
@@ -92,19 +92,19 @@ If you want to create a thicker line for the stroke, you can use the lineWidth p
 ```javascript
 context.lineWidth = 5;
 ```
-In the example the circle is drawn in blue, then the triangle is drawn without specifying a specific color and then the rectangle is drawn in red. Since the context stores the fill and stroke style, the triangle is drawn in blue too, without specifying this specifically.<br>
+In the example the circle is drawn in blue, then the triangle is drawn without specifying a specific color and then the rectangle is drawn in red. Since the context stores the fill and stroke style, the triangle is drawn in blue too, without specifying this specifically.<br/>
 
 And there is another notable thing happening here. The triangle is not so much a real triangle. It is more like a rotated L-shape. That's because unlike the fill() command, stroke() doesn't tie the beginning of the path to the end. If you need a stroke of a triangle you'll have to specify three lines, not two.
 
 ### Draw an SVG path to the canvas
-You can stack multiple drawing operations to create complex graphics. But what if the graphics are so complex that drawing operations on the context don't cut it anymore? In those cases you can use **SVG paths**.<br>
+You can stack multiple drawing operations to create complex graphics. But what if the graphics are so complex that drawing operations on the context don't cut it anymore? In those cases you can use **SVG paths**.<br/>
 
 [SVG](https://www.sitepoint.com/svg-101-what-is-svg/), or **scalable vector graphics**, contain a detailed explanation of an graphic. But instead of describing pixels, like ordinary images, they describe lines and curves. Just like the paths you are creating for the canvas. The big advantages of using vector graphics is that they can be scaled without limit. Unlike regular pixel images, they don't lose quality.
 
-You can find SVG files online or create your own with vector drawing software like [Illustrator](https://www.adobe.com/products/illustrator.html) or [Inkscape](https://inkscape.org). Here's an example of creating a path with the Inkscape editor.<br>
+You can find SVG files online or create your own with vector drawing software like [Illustrator](https://www.adobe.com/products/illustrator.html) or [Inkscape](https://inkscape.org). Here's an example of creating a path with the Inkscape editor.<br/>
 ![](resources/draw-shapes-svg-1.jpg)
 
-Inside those SVG files you can find path information. It's actually pretty fun to check it out. It's just a long array of points with moves and curves.<br>
+Inside those SVG files you can find path information. It's actually pretty fun to check it out. It's just a long array of points with moves and curves.<br/>
 Here's an example of a small part of the inside of a simple SVG file. You can just open it with a text editor.
 ```xml
 <svg width="210mm" height="297mm" viewBox="0 0 210 297" version="1.1" id="svg1" inkscape:version="1.3.2 (091e20e, 2023-11-25)" sodipodi:docname="drawing.svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">

@@ -50,9 +50,9 @@ To perform drawing operations, you'll need a decent reference in your code to yo
     }
 </script>
 ```
-The most important steps are taken inside the init() function. In there the canvas is stored for later reference by calling getElementById() to retrieve the canvas element.<br>
-The canvas has no functions to draw on its own, you'll need a context for that. Call getContext() to retrieve the context from the canvas. '2d' is passed as argument to get a CanvasRenderingContext2D object. That's the context you need to draw [2D objects](https://www.computerhope.com/jargon/num/2d.htm). There are also other context types like [WebGL](https://www.khronos.org/webgl/), for [3D](https://www.tutorialspoint.com/computer_graphics/3d_computer_graphics.htm), but that's not what we need right now.<br>
-Once the references are made, the function draw() is called. In there, the actual drawing operation will be performed.<br>
+The most important steps are taken inside the init() function. In there the canvas is stored for later reference by calling getElementById() to retrieve the canvas element.<br/>
+The canvas has no functions to draw on its own, you'll need a context for that. Call getContext() to retrieve the context from the canvas. '2d' is passed as argument to get a CanvasRenderingContext2D object. That's the context you need to draw [2D objects](https://www.computerhope.com/jargon/num/2d.htm). There are also other context types like [WebGL](https://www.khronos.org/webgl/), for [3D](https://www.tutorialspoint.com/computer_graphics/3d_computer_graphics.htm), but that's not what we need right now.<br/>
+Once the references are made, the function draw() is called. In there, the actual drawing operation will be performed.<br/>
 > ### JavaScript in strict mode
 > ```"use strict"``` is telling the browser to run the code in strict mode. This means your code will be validated more strictly. Things like using an undeclared variable are no longer allowed. This will force you to write cleaner code, which will prevent coding errors. It is an optional line, but it is recommended to leave it in. Learn more about [use strict](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) here.
 
@@ -72,7 +72,7 @@ function draw() {
     context.fillRect(100, 50, 200, 175);
 }
 ```
-A ```fillStyle``` is set on the context and a rectangle is draw by calling ```fillRect()```.<br>
+A ```fillStyle``` is set on the context and a rectangle is draw by calling ```fillRect()```.<br/>
 Open your .html file and it should draw a rectangle on the canvas:
 ![Rectangle](resources/canvas-setup-rect.png)
 With the current code, the rectangle is either red or blue. This is because every time the page is loaded a new random color is picked in the ```draw()``` function, by using ```Math.random()``` to pick a color as fill style. You can try to refresh this page a couple of times and see the color getting changed.

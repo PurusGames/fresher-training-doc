@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkfresher_training_doc=self.webpackChunkfresher_training_doc||[]).push([[770],{3414:e=>{e.exports=JSON.parse('{"metadata":{"permalink":"/fresher-training-doc/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

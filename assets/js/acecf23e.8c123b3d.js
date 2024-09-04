@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkfresher_training_doc=self.webpackChunkfresher_training_doc||[]).push([[903],{1912:e=>{e.exports=JSON.parse('{"blogBasePath":"/fresher-training-doc/blog","blogTitle":"Blog","authorsListPath":"/fresher-training-doc/blog/authors"}')}}]);

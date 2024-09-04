@@ -247,7 +247,7 @@ We need to tell WebGL how to convert from the clip space values we'll be setting
 gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 ```
 
-This tells WebGL the -1 +1 clip space maps to 0 <-> ```gl.canvas.width``` for x and 0 <-> ```gl.canvas.height``` for y.
+This tells WebGL the `-1` `+1` clip space maps to 0 `<->` ```gl.canvas.width``` for x and 0 `<->` ```gl.canvas.height``` for y.
 
 We clear the canvas. ```0, 0, 0, 0``` are red, green, blue, alpha respectively, so in this case we're making the canvas transparent.
 

@@ -1,6 +1,4 @@
-# WebGL fundamentals
-
-## Image Processing
+# Image Processing
 
 To draw images in WebGL we need to use textures. Similarly to the way WebGL expects clip space coordinates when rendering instead of pixels, WebGL expects texture coordinates when reading a texture. Texture coordinates go from 0.0 to 1.0 no matter the dimensions of the texture.
 

@@ -1,6 +1,4 @@
-# WebGL fundamentals
-
-## Introduction
+# Introduction
 
 ### What is this tutorial about?
 

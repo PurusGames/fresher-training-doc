@@ -269,11 +269,13 @@ How about applying multiple effects? It could be done by generating shaders on t
 
 A more flexible way is to use 2 more textures and render to each texture in turn, ping ponging back and forth and applying the next effect each time.
 
+```
         Original Image  -> [Blur]            ->     Texture 1
         Texture 1       -> [Sharpen          ->     Texture 2
         Texture 2       -> [Edge Detect]     ->     Texture 1
         Texture 1       -> [Blur]            ->     Texture 2
         Texture 2       -> [Normal]          ->     Canvas
+```
 
 To do this we need to create framebuffers. In WebGL and OpenGL, a Framebuffer is actually a poor name. A WebGL/OpenGL Framebuffer is really just a collection of state (a list of attachments) and not actually a buffer of any kind. But, by attaching a texture to a framebuffer we can render into that texture.
 

@@ -22,5 +22,5 @@ Choosing WebGL over the Canvas 2D context depends on the specific needs of your 
 
 The series will take you through the following steps:
 1. [WebGL fundamentals](./webgl-funamentals.md)
-2. [WebHL how it works](./webgl-how-it-works.md)
+2. [WebGL how it works](./webgl-how-it-works.md)
 3. [WebGL image processing](./webgl-image-processing.md)
